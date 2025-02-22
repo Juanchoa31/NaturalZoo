@@ -9,9 +9,7 @@ public class NaturalZoo {
         
         
         int opc = 0;
-        Visitor vis;
         int i = 0;
-        int a = 0;
 
         do {
             opc = Integer.parseInt(JOptionPane.showInputDialog(
