@@ -6,12 +6,10 @@ public class NaturalZoo {
 
     public static void main(String[] args) {
         Visitor[] listVisitor = new Visitor[10];
-        Visitor[] listActivity = new Visitor[5];
         
         
         int opc = 0;
         Visitor vis;
-        Visitor act;
         int i = 0;
         int a = 0;
 
