@@ -6,9 +6,8 @@ public class NaturalZoo {
 
     public static void main(String[] args) {
         Visitor[] listVisitor = new Visitor[10];
-        
-        
-        int opc = 0;
+
+        int opc;
         int i = 0;
 
         do {
@@ -27,52 +26,60 @@ public class NaturalZoo {
                         String activity = JOptionPane.showInputDialog("Ingrese su actividad preferida");
                         int age = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la edad: "));
 
+                        // Verificar si el visitante ya existe
                         boolean userFound = false;
-
                         for (int x = 0; x < i; x++) {
                             if (listVisitor[x].getName().equals(name)) {
                                 userFound = true;
                             }
                         }
 
+                        // Contar cuántas personas ya están registradas en la actividad
+                        int activityCount = 0;
+                        for (int x = 0; x < i; x++) {
+                            if (listVisitor[x].getActivity().equals(activity)) {
+                                activityCount++;
+                            }
+                        }
+
                         if (userFound) {
                             JOptionPane.showMessageDialog(null, "El nombre del usuario que desea agregar ya se encuentra creado. Inténtelo de nuevo");
+                        } else if (activityCount >= 5) {
+                            JOptionPane.showMessageDialog(null, "La actividad '" + activity + "' ya está llena (máximo 5 personas).");
                         } else {
-                            vis = new Visitor(name, activity, age);
-
-                            listVisitor[i] = vis;
+                            listVisitor[i] = new Visitor(name, activity, age);
                             i++;
+                            JOptionPane.showMessageDialog(null, "Visitante registrado con éxito.");
                         }
                     }
                     break;
                 case 2:
-
-                    for (int x = 0; x < i; x++) {
-                        JOptionPane.showMessageDialog(null, listVisitor[x].toString());
+                    if (i == 0) {
+                        JOptionPane.showMessageDialog(null, "No hay visitantes registrados.");
+                    } else {
+                        for (int x = 0; x < i; x++) {
+                            JOptionPane.showMessageDialog(null, listVisitor[x].toString());
+                        }
                     }
-
                     break;
                 case 3:
-                    boolean visitorActivity = true;
-                    
-                    
                     String searchActivity = JOptionPane.showInputDialog("Digite la actividad que desea buscar");
-                        for (int x = 0; x < i; x++) {
-                            if (listVisitor[x].getActivity().equals(searchActivity)) {
-                                JOptionPane.showMessageDialog(null, listVisitor[x].toString());
-                            } else {
-                                JOptionPane.showMessageDialog(null, "Actividad no encontrada");
-                            }
+                    boolean foundActivity = false;
+
+                    for (int x = 0; x < i; x++) {
+                        if (listVisitor[x].getActivity().equals(searchActivity)) {
+                            JOptionPane.showMessageDialog(null, listVisitor[x].toString());
+                            foundActivity = true;
                         }
-                        JOptionPane.showMessageDialog(null, "Eres el primero en ingresar a la actividad");
-                        visitorActivity = false;
-                        
-                        JOptionPane.showMessageDialog(null, "Bienvenido a la actividad");
+                    }
 
-
+                    if (!foundActivity) {
+                        JOptionPane.showMessageDialog(null, "No hay visitantes registrados en la actividad '" + searchActivity + "'.");
+                    }
                     break;
                 case 4:
                     System.exit(0);
+                    break;
                 default:
                     JOptionPane.showMessageDialog(null, "Opción no válida");
             }
