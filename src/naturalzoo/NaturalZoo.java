@@ -43,7 +43,6 @@ public class NaturalZoo {
                             vis = new Visitor(name, activity, age);
 
                             listVisitor[i] = vis;
-                            listVisitor[i] = vis;
                             i++;
                         }
                     }
